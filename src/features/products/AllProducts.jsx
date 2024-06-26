@@ -13,7 +13,6 @@ const AllProducts = () => {
     products,
     isLoading: isProductsLoading,
     error: errorProducts,
-    category: currentCategory,
   } = useFetchProducts();
   const {
     categories,
@@ -21,6 +20,8 @@ const AllProducts = () => {
     error: errorCategories,
   } = useFetchCategories();
   const [searchParams, setSearchParams] = useSearchParams();
+
+  const currentCategory = searchParams.get("category");
 
   const sortValue = searchParams.get("sortBy") || "";
   const [field, direction] = sortValue.split("-");
@@ -59,14 +60,16 @@ const AllProducts = () => {
     <main className="mt-[60px] container mx-auto p-4">
       <section className="flex flex-col md:flex-row gap-8 md:gap-4">
         <aside className="w-full md:w-[20%]">
-          <h1 className="uppercase font-bold text-xl mb-6">
+          {/* <h1 className="uppercase font-bold text-xl mb-6">
             {currentCategory}
-          </h1>
+          </h1> */}
           <div>
             <p className="uppercase font-bold mb-4">Browse</p>
             <div className="flex flex-wrap md:flex-col uppercase text-sm gap-2">
               <button
-                className="text-left"
+                className={`text-left uppercase ${
+                  !currentCategory ? "text-amber-600" : ""
+                }`}
                 onClick={() => handleChangeCategory("")}
               >
                 all
@@ -74,7 +77,9 @@ const AllProducts = () => {
               {categories.map((category) => {
                 return (
                   <button
-                    className="text-left"
+                    className={`text-left uppercase ${
+                      category === currentCategory ? "text-amber-600" : ""
+                    }`}
                     key={category}
                     onClick={() => handleChangeCategory(category)}
                   >

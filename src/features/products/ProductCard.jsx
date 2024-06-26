@@ -42,7 +42,7 @@ const ProductCard = ({ product }) => {
           />
         </Link>
         {isInCart ? (
-          <div className="flex gap-2 items-center font-semibold absolute bottom-0 p-2 bg-white transition-all duration-300 transform translate-y-[56px] group-hover:translate-y-[-50%]">
+          <div className="flex gap-2 items-center font-semibold absolute bottom-0 p-2 bg-white transition-all duration-300 transform lg:translate-y-[56px] md:translate-y-[-50%] lg:group-hover:translate-y-[-50%]">
             <button className="p-2 bg-gray-200" onClick={handleDecrease}>
               -
             </button>
@@ -53,7 +53,7 @@ const ProductCard = ({ product }) => {
           </div>
         ) : (
           <button
-            className="font-semibold absolute bottom-0 p-4 bg-white transition-all duration-300 transform translate-y-[56px] group-hover:translate-y-[-50%]"
+            className="hidden lg:block font-semibold absolute bottom-0 p-4 bg-white transition-all duration-300 transform translate-y-[56px] group-hover:translate-y-[-50%]"
             onClick={handleAddToCart}
           >
             Add to cart
@@ -69,6 +69,17 @@ const ProductCard = ({ product }) => {
         </Link>
         <StarRating rating={product.rating} />
         <span className="font-bold">${product.price}</span>
+      </div>
+
+      <div className="mt-4 block lg:hidden text-center sm:text-left">
+        {!isInCart && (
+          <button
+            className="font-semibold px-3 py-2 bg-slate-800 text-white transition-all duration-300 "
+            onClick={handleAddToCart}
+          >
+            Add to cart
+          </button>
+        )}
       </div>
     </div>
   );
