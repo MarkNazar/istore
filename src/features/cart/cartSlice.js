@@ -35,6 +35,7 @@ const cartSlice = createSlice({
         if (item) item.quantity += action.payload.quantity;
         item.totalPrice = item.unitPrice * item.quantity;
       }
+      cartSlice.caseReducers.openCart(state);
       cartSlice.caseReducers.saveToLocalStorage(state);
     },
     increaseItemQuantity(state, action) {
